@@ -24,7 +24,7 @@ if __name__ == "__main__":
     atexit.register(frontier.save_frontier)
 
     # Instantiates a crawler object and starts crawling
-    
+
     file_path = 'stats.txt'
 
     fp = open(file_path, 'w')
