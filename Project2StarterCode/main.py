@@ -1,4 +1,5 @@
 import atexit
+import atexit
 import logging
 
 import sys
@@ -23,5 +24,12 @@ if __name__ == "__main__":
     atexit.register(frontier.save_frontier)
 
     # Instantiates a crawler object and starts crawling
-    crawler = Crawler(frontier, corpus)
+    
+    file_path = 'stats.txt'
+
+    fp = open(file_path, 'w')
+
+    crawler = Crawler(frontier, corpus, fp)
     crawler.start_crawling()
+
+    fp.close()
