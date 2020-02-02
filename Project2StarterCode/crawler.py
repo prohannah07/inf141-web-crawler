@@ -94,7 +94,7 @@ class Crawler:
                                     + "|thmx|mso|arff|rtf|jar|csv" \
                                     + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) \
                     and parsed.fragment == "" \
-                    and not "attachment" in parsed.path \
+                    and False if( "grape" in parsed.hostname and "attachment" in parsed.path ) else True \
                     and not "replytocom" in parsed.path
 
         except TypeError:
