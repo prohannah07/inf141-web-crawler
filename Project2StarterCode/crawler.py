@@ -1,8 +1,10 @@
 import logging
 import re
 from urllib.parse import urlparse
+from bs4 import BeautifulSoup
 
 logger = logging.getLogger(__name__)
+
 
 class Crawler:
     """
@@ -21,7 +23,8 @@ class Crawler:
         """
         while self.frontier.has_next_url():
             url = self.frontier.get_next_url()
-            logger.info("Fetching URL %s ... Fetched: %s, Queue size: %s", url, self.frontier.fetched, len(self.frontier))
+            logger.info("Fetching URL %s ... Fetched: %s, Queue size: %s",
+                        url, self.frontier.fetched, len(self.frontier))
             url_data = self.corpus.fetch_url(url)
 
             for next_link in self.extract_next_links(url_data):
@@ -40,6 +43,42 @@ class Crawler:
         Suggested library: lxml
         """
         outputLinks = []
+
+        if url_data["content"] is not None:
+            soup = BeautifulSoup(url_data["content"], 'html.parser')
+            for link in soup.find_all('a'):
+                # print(link.get('href'))
+                check = link.get('href')
+                if url_data["http_code"] == 200 and url_data["size"] > 0 and check is not None:
+                    if "http" in check:
+                        print(check)
+                        outputLinks.append(check)
+                    elif check.startswith("//www."):
+                        print(check[2:])
+                        outputLinks.append(check[2:])
+                    elif check.startswith("/"):
+                        print(url_data["url"] + check[1:])
+                        outputLinks.append(url_data["url"] + check[1:])
+                    elif check.startswith(".."):
+                        print(url_data["url"] + check)
+                        outputLinks.append(url_data["url"] + check)
+
+                # print(link.get('href'))
+
+        # print("url: " + str(url_data["url"]))
+        # if url_data["content"] is None:
+        #     print("content: None")
+        # else:
+        #     print("content: some binary file")
+        # print("size: " + str(url_data["size"]))
+        # print("content_type: " + str(url_data["content_type"]))
+        # print("http_code: " + str(url_data["http_code"]))
+        # print("is_redirected: " + str(url_data["is_redirected"]))
+        # print("final_url: " + str(url_data["final_url"]))
+
+        # outputLinks.append("https://www.ics.uci.edu/about/")
+        # outputLinks.append("https://www.ics.uci.edu/about/../ugrad/index.php")
+
         return outputLinks
 
     def is_valid(self, url):
@@ -53,13 +92,12 @@ class Crawler:
             return False
         try:
             return ".ics.uci.edu" in parsed.hostname \
-                   and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" \
-                                    + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" \
-                                    + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" \
-                                    + "|thmx|mso|arff|rtf|jar|csv" \
+                   and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"
+                                    + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf"
+                                    + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1"
+                                    + "|thmx|mso|arff|rtf|jar|csv"
                                     + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower())
 
         except TypeError:
             print("TypeError for ", parsed)
             return False
-
