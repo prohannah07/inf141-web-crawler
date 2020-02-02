@@ -51,7 +51,7 @@ class Crawler:
 
         Suggested library: lxml
         """
-        #outputLinks = ["https://www.ics.uci.edu/about/", "https://www.ics.uci.edu/about/equity/"]
+        # outputLinks = ["https://www.ics.uci.edu/about/", "https://www.ics.uci.edu/about/equity/"]
         outputLinks = []
 
         if url_data["http_code"] == 200 and url_data["size"] > 0:
@@ -97,7 +97,10 @@ class Crawler:
                                     + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf"
                                     + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1"
                                     + "|thmx|mso|arff|rtf|jar|csv"
-                                    + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower())
+                                    + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) \
+                and parsed.fragment == "" \
+                and not "attachment" in parsed.path \
+                and not "replytocom" in parsed.path
 
         except TypeError:
             print("TypeError for ", parsed)
