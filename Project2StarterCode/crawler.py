@@ -1,6 +1,9 @@
 import logging
 import re
 from urllib.parse import urlparse
+from urllib.parse import urljoin
+from bs4 import BeautifulSoup
+import lxml
 
 logger = logging.getLogger(__name__)
 
@@ -10,9 +13,10 @@ class Crawler:
     the frontier
     """
 
-    def __init__(self, frontier, corpus):
+    def __init__(self, frontier, corpus, file):
         self.frontier = frontier
         self.corpus = corpus
+        self.file = file
 
     def start_crawling(self):
         """
@@ -39,8 +43,55 @@ class Crawler:
 
         Suggested library: lxml
         """
+        #outputLinks = ["https://www.ics.uci.edu/about/", "https://www.ics.uci.edu/about/equity/"]
         outputLinks = []
+        '''
+        print("url: " + url_data["url"])
+        if url_data["content"] is None:
+            print("content: None")
+        else:
+            print("content: some binary file")
+        print("size: " + str(url_data["size"]))
+        print("content_type: " + str(url_data["content_type"]))
+        print("http_code: " + str(url_data["http_code"]))
+        print("is_redirected: " + str(url_data["is_redirected"]))
+        print("final_url: " + str(url_data["final_url"]))
+        '''
+        #self.file.write("------------------------------------------")
+        self.file.write(url_data['final_url']) if url_data['is_redirected'] == True else self.file.write(url_data['url'])
+        #self.file.write("------------------------------------------")
+        self.file.write("\n")
+        soup = BeautifulSoup(url_data["content"], 'lxml-xml')
+        for link in soup.find_all('a', href=True):
+            extracted_link = link.get('href')
+            if "http" not in extracted_link:
+                #print(link.get('href'))
+                if url_data["is_redirected"] == True:
+                   web_url = url_data["final_url"]
+                   extracted_link = urljoin(web_url,extracted_link)
+                   #self.file.write(urljoin(web_url,extracted_link))
+                   #self.file.write("\n")
+                else:
+                    web_url = url_data["url"]
+                    extracted_link = urljoin(web_url,extracted_link)
+                    #self.file.write(urljoin(web_url,extracted_link))
+                    #self.file.write("\n")
+            outputLinks.append(extracted_link)
         return outputLinks
+        '''
+                if url_data["is_redirected"] == True:
+                    self.file.write(url_data['url'])
+                    self.file.write("  --------->  ")
+                    self.file.write(url_data['final_url'])
+                    self.file.write("\n")
+                else:
+                    self.file.write(url_data['url'])
+                    self.file.write("\n")
+                #print(link.get('href'))
+
+                #print(soup.get_text())
+        ''' 
+        
 
     def is_valid(self, url):
         """
