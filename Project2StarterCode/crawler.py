@@ -4,6 +4,8 @@ from urllib.parse import urlparse
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 import lxml
+import tldextract
+import analytics
 
 logger = logging.getLogger(__name__)
 
@@ -30,10 +32,14 @@ class Crawler:
                         url, self.frontier.fetched, len(self.frontier))
             url_data = self.corpus.fetch_url(url)
 
+            # valid_count = 0  # analytics
             for next_link in self.extract_next_links(url_data):
                 if self.is_valid(next_link):
+                    # analytics.get_subdomain(url)  # analytics
+                    # valid_count += 1  # analytics
                     if self.corpus.get_file_name(next_link) is not None:
                         self.frontier.add_url(next_link)
+            # analytics.check_isGreater(url_data["url"], valid_count)  # analytics
 
     def extract_next_links(self, url_data):
         """
@@ -47,52 +53,29 @@ class Crawler:
         """
         #outputLinks = ["https://www.ics.uci.edu/about/", "https://www.ics.uci.edu/about/equity/"]
         outputLinks = []
-        '''
-        print("url: " + url_data["url"])
-        if url_data["content"] is None:
-            print("content: None")
-        else:
-            print("content: some binary file")
-        print("size: " + str(url_data["size"]))
-        print("content_type: " + str(url_data["content_type"]))
-        print("http_code: " + str(url_data["http_code"]))
-        print("is_redirected: " + str(url_data["is_redirected"]))
-        print("final_url: " + str(url_data["final_url"]))
-        '''
+
         if url_data["http_code"] == 200 and url_data["size"] > 0:
-            self.file.write(url_data['url'] + "  ------>  " + url_data['final_url']) if url_data['is_redirected'] == True else self.file.write(url_data['url'])
-            self.file.write("\n")
+            # self.file.write(url_data['url'] + "  ------>  " + url_data['final_url']
+            #                 ) if url_data['is_redirected'] == True else self.file.write(url_data['url'])
+            # self.file.write("\n")
             soup = BeautifulSoup(url_data["content"], 'lxml-xml')
             for link in soup.find_all('a', href=True):
                 extracted_link = link.get('href')
                 if "http" not in extracted_link:
-                    #print(link.get('href'))
+                    # print(link.get('href'))
                     if url_data["is_redirected"] == True:
                         web_url = url_data["final_url"]
-                        extracted_link = urljoin(web_url,extracted_link)
-                        #self.file.write(urljoin(web_url,extracted_link))
-                        #self.file.write("\n")
+                        extracted_link = urljoin(web_url, extracted_link)
+                        # self.file.write(urljoin(web_url,extracted_link))
+                        # self.file.write("\n")
                     else:
                         web_url = url_data["url"]
-                        extracted_link = urljoin(web_url,extracted_link)
-                        #self.file.write(urljoin(web_url,extracted_link))
-                        #self.file.write("\n")
-                outputLinks.append(extracted_link) 
+                        extracted_link = urljoin(web_url, extracted_link)
+                        # self.file.write(urljoin(web_url,extracted_link))
+                        # self.file.write("\n")
+                outputLinks.append(extracted_link)
         return outputLinks
-        '''
-                if url_data["is_redirected"] == True:
-                    self.file.write(url_data['url'])
-                    self.file.write("  --------->  ")
-                    self.file.write(url_data['final_url'])
-                    self.file.write("\n")
-                else:
-                    self.file.write(url_data['url'])
-                    self.file.write("\n")
-                #print(link.get('href'))
-
-                #print(soup.get_text())
-        ''' 
-        
+        # return ["https://www.ics.uci.edu/about/", "https://www.ics.uci.edu/about/equity/"]
 
     def is_valid(self, url):
         """
@@ -100,7 +83,12 @@ class Crawler:
         filter out crawler traps. Duplicated urls will be taken care of by frontier. You don't need to check for duplication
         in this method
         """
+        # ext = tldextract.extract(url)
+        # print("subdomain: " + ext.subdomain, "domain: " +
+        #       ext.domain, "suffix: " + ext.suffix)
+
         parsed = urlparse(url)
+
         if parsed.scheme not in set(["http", "https"]):
             return False
         try:
