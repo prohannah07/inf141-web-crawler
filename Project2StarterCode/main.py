@@ -8,6 +8,8 @@ from corpus import Corpus
 from crawler import Crawler
 from frontier import Frontier
 
+import analytics
+
 if __name__ == "__main__":
     # Configures basic logging
     logging.basicConfig(format='%(asctime)s (%(name)s) %(levelname)s %(message)s', datefmt='%m/%d/%Y %I:%M:%S %p',
@@ -33,3 +35,5 @@ if __name__ == "__main__":
     crawler.start_crawling()
 
     fp.close()
+
+    analytics.display_analytics()

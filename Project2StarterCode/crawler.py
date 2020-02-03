@@ -32,14 +32,21 @@ class Crawler:
                         url, self.frontier.fetched, len(self.frontier))
             url_data = self.corpus.fetch_url(url)
 
-            # valid_count = 0  # analytics
+            valid_count = 0  # analytics
+
             for next_link in self.extract_next_links(url_data):
                 if self.is_valid(next_link):
-                    # analytics.get_subdomain(url)  # analytics
-                    # valid_count += 1  # analytics
+
+                    analytics.get_subdomain(next_link)  # analytics
+                    valid_count += 1  # analytics
+
                     if self.corpus.get_file_name(next_link) is not None:
                         self.frontier.add_url(next_link)
-            # analytics.check_isGreater(url_data["url"], valid_count)  # analytics
+
+            analytics.check_isGreater(
+                url_data["url"], valid_count)  # analytics
+            analytics.longest_words(
+                url_data["url"], url_data["content"])  # analytics
 
     def extract_next_links(self, url_data):
         """
@@ -66,13 +73,9 @@ class Crawler:
                     if url_data["is_redirected"] == True:
                         web_url = url_data["final_url"]
                         extracted_link = urljoin(web_url, extracted_link)
-                        # self.file.write(urljoin(web_url,extracted_link))
-                        # self.file.write("\n")
                     else:
                         web_url = url_data["url"]
                         extracted_link = urljoin(web_url, extracted_link)
-                        # self.file.write(urljoin(web_url,extracted_link))
-                        # self.file.write("\n")
                 outputLinks.append(extracted_link)
         return outputLinks
         # return ["https://www.ics.uci.edu/about/", "https://www.ics.uci.edu/about/equity/"]
