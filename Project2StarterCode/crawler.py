@@ -49,6 +49,7 @@ class Crawler:
                 if self.is_valid(next_link):
 
                     self.dl_links_file.write(next_link + "\n")  # analytics
+                    self.trap_links_file.write("hello\n")
                     analytics.get_subdomain(next_link)  # analytics
                     valid_count += 1  # analytics
 

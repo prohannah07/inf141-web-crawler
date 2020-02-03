@@ -65,13 +65,13 @@ if __name__ == "__main__":
 
     analytics_path1 = 'analytics_part1.txt'
     analytics_path2 = 'analytics_part2.txt'
-    analytics_path3 = 'analytics_part2.txt'
+    analytics_path3 = 'analytics_part3.txt'
 
     ap1 = open(analytics_path1, 'w')
     ap2 = open(analytics_path2, 'w')
     ap3 = open(analytics_path3, 'w')
 
-    crawler = Crawler(frontier, corpus, ap2)
+    crawler = Crawler(frontier, corpus, ap2, ap3)
     crawler.start_crawling()
 
     # fp.close()
