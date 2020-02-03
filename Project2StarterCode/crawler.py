@@ -126,12 +126,15 @@ class Crawler:
 
             if ".ics.uci.edu" in parsed.hostname and parsed.fragment == "":
                 return True
-            elif not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"
-                              + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf"
-                              + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1"
-                              + "|thmx|mso|arff|rtf|jar|csv"
-                              + "|sql|htm|java|prefs|class|h|cc|cpp|svn"
-                              + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) and not re.match("^.*calendar.*$", parsed.path.lower()) and not "replytocom" in parsed.path and not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower()))):
+            elif not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" + \
+                                "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" + \
+                                "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" + \
+                                "|thmx|mso|arff|rtf|jar|csv" + \
+                                "|sql|htm|java|prefs|class|h|cc|cpp|svn" + \
+                                "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) and \
+                    not re.match("^.*calendar.*$", parsed.path.lower()) and \
+                    not "replytocom" in parsed.path and \
+                    not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower()))):
                 self.trap_links_file.write(url + "\n")
                 return False
 
