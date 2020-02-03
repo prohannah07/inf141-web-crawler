@@ -16,10 +16,21 @@ class Crawler:
     the frontier
     """
 
-    def __init__(self, frontier, corpus, file):
+    def __init__(self, frontier, corpus, dl_links_file, trap_links_file):
         self.frontier = frontier
         self.corpus = corpus
-        self.file = file
+        self.dl_links_file = dl_links_file
+        self.trap_links_file = trap_links_file
+
+        self.dl_links_file.write(
+            "This file contains ANALYTICS SPECIFICATIONS #3\n")
+        self.dl_links_file.write(
+            "Specifically, this file contais all the valid downloaded urls\n\n")
+
+        self.trap_links_file.write(
+            "This file contains ANALYTICS SPECIFICATIONS #3\n")
+        self.trap_links_file.write(
+            "Specifically, this file contais all the identified trap urls\n\n")
 
     def start_crawling(self):
         """
@@ -37,6 +48,7 @@ class Crawler:
             for next_link in self.extract_next_links(url_data):
                 if self.is_valid(next_link):
 
+                    self.dl_links_file.write(next_link + "\n")  # analytics
                     analytics.get_subdomain(next_link)  # analytics
                     valid_count += 1  # analytics
 
@@ -96,21 +108,21 @@ class Crawler:
             return False
         try:
             return ".ics.uci.edu" in parsed.hostname \
-                   and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" \
-                                    + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" \
-                                    + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" \
-                                    + "|thmx|mso|arff|rtf|jar|csv" \
-                                    + "|sql|htm|java|prefs|class|h|cc|cpp|svn" \
+                   and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"
+                                    + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf"
+                                    + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1"
+                                    + "|thmx|mso|arff|rtf|jar|csv"
+                                    + "|sql|htm|java|prefs|class|h|cc|cpp|svn"
                                     + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) \
-                    and parsed.fragment == "" \
-                    and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) \
-                    and not re.match("^.*calendar.*$", parsed.path.lower()) \
-                    and not "replytocom" in parsed.path \
-                    and not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower())))
-                    #                  \
-                    # and parsed.fragment == "" \
-                    # and False if( "grape" in parsed.hostname and "attachment" in parsed.path ) else True \
-                    # and not "replytocom" in parsed.path
+                and parsed.fragment == "" \
+                and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) \
+                and not re.match("^.*calendar.*$", parsed.path.lower()) \
+                and not "replytocom" in parsed.path \
+                and not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower())))
+            #                  \
+            # and parsed.fragment == "" \
+            # and False if( "grape" in parsed.hostname and "attachment" in parsed.path ) else True \
+            # and not "replytocom" in parsed.path
 
         except TypeError:
             print("TypeError for ", parsed)

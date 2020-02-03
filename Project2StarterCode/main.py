@@ -30,8 +30,8 @@ if __name__ == "__main__":
 
     # Instantiates a crawler object and starts crawling
 
-    #https://www.ics.uci.edu/~sjordan/research/device attachment.html
-    #https://grape.ics.uci.edu/wiki/asterix/raw-attachment/wiki/stats170ab-2018/postgresloading.sql
+    # https://www.ics.uci.edu/~sjordan/research/device attachment.html
+    # https://grape.ics.uci.edu/wiki/asterix/raw-attachment/wiki/stats170ab-2018/postgresloading.sql
     # parsed = urlparse("https://grape.ics.uci.edu/wiki/asterix/raw-attachment/wiki/stats170ab-2018/postgresloading.sql")
     # print(parsed)
     # if ".ics.uci.edu" in parsed.hostname :
@@ -59,13 +59,25 @@ if __name__ == "__main__":
     # parsed = urlparse("http://flamingo.ics.uci.edu/releases/4.1/src/filtertree/data/.svn/entries")
     # print(parsed)
 
-    file_path = 'stats.txt'
+    # file_path = 'stats.txt'
 
-    fp = open(file_path, 'w')
+    # fp = open(file_path, 'w')
 
-    crawler = Crawler(frontier, corpus, fp)
+    analytics_path1 = 'analytics_part1.txt'
+    analytics_path2 = 'analytics_part2.txt'
+    analytics_path3 = 'analytics_part2.txt'
+
+    ap1 = open(analytics_path1, 'w')
+    ap2 = open(analytics_path2, 'w')
+    ap3 = open(analytics_path3, 'w')
+
+    crawler = Crawler(frontier, corpus, ap2)
     crawler.start_crawling()
 
-    fp.close()
+    # fp.close()
 
-    analytics.display_analytics()
+    analytics.display_analytics(ap1)
+
+    ap1.close()
+    ap2.close()
+    ap3.close()
