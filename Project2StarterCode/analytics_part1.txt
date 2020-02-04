@@ -1,0 +1,211 @@
+this file contains ANALYTICS SPECIFICATIONS' 1,2,4 and 5
+1: Keep track of the subdomains that it visited, and count
+	how many different URLs it has processed from each
+	of those subdomains.
+2: Find the page with the most valid out links
+	(of all pages given to your crawler).
+4: What is the longest page in terms of number of words?
+	(HTML markup doesn’t count as words).
+5: What are the 50 most common words in the entire set of pages?
+	(Ignore English stop words, which can be found,
+	(https://www.ranks.nl/stopwords).
+
+
+Main Domain: .uci.edu
+SUBDOMAIN                        COUNT
+ics                        231435
+fano.ics                   204134
+ngs.ics                    98022
+swiki.ics                  93209
+informatics                47867
+grape.ics                  42025
+wics.ics                   19722
+sli.ics                    19172
+ganglia.ics                11036
+vision.ics                 9223
+sdcl.ics                   6282
+cml.ics                    5812
+flamingo.ics               4936
+hack.ics                   3126
+duttgroup.ics              2151
+emj.ics                    1600
+evoke.ics                  1575
+cradl.ics                  1507
+cloudberry.ics             1367
+intranet.ics               1060
+calendar.ics               986
+mcs.ics                    820
+futurehealth.ics           790
+transformativeplay.ics     735
+mhcid.ics                  723
+cwicsocal18.ics            625
+computableplant.ics        557
+mondego.ics                554
+dynamo.ics                 422
+cert.ics                   394
+mailman.ics                393
+jgarcia.ics                386
+honors.ics                 374
+luci.ics                   336
+mse.ics                    283
+frost.ics                  225
+graphics.ics               211
+wearablegames.ics          166
+hobbes.ics                 144
+iasl.ics                   130
+checkmate.ics              127
+support.ics                119
+chenli.ics                 113
+asterix.ics                84
+webmail.ics                81
+netreg.ics                 80
+seal.ics                   71
+studentcouncil.ics         64
+alderis.ics                63
+fr.ics                     60
+scale.ics                  50
+sourcerer.ics              44
+elnino.ics                 40
+sana.ics                   40
+isg.ics                    39
+radicle.ics                34
+sconce.ics                 34
+i-sensorium.ics            33
+archive.ics                23
+malek.ics                  20
+ipubmed.ics                18
+tippersweb.ics             18
+psearch.ics                17
+graphmod.ics               15
+informatics.ics            14
+mswe.ics                   14
+hombao.ics                 13
+sherlock.ics               13
+yarra.ics                  10
+elms.ics                   9
+codeexchange.ics           8
+ugradforms.ics             8
+aiclub.ics                 7
+helpdesk.ics               7
+jujube.ics                 7
+matt-smith-v2.ics          6
+tps.ics                    6
+labbie.ics                 5
+se.ics                     5
+sprout.ics                 5
+timesheet.ics              5
+asterixdb.ics              4
+hana.ics                   4
+vip.ics                    4
+athletics                  3
+checkin.ics                3
+chime.ics                  3
+keys.ics                   3
+mapgrid.ics                3
+nagios.ics                 3
+se4s.ics                   3
+student-council.ics        3
+ucf.ics                    3
+xtune.ics                  3
+.ics                       2
+alumni.ics                 2
+auge.ics                   2
+awareness.ics              2
+cbcl.ics                   2
+cocoa-krispies.ics         2
+db.ics                     2
+dblp.ics                   2
+duke.ics                   2
+jobs.ics                   2
+kdd.ics                    2
+nile.ics                   2
+pasteur.ics                2
+perennialpolycultures.ics  2
+tastier.ics                2
+cherry.ics                 1
+datalab.ics                1
+dejavu.ics                 1
+drzaius.ics                1
+emj-pc.ics                 1
+ftp.ics                    1
+ipf.ics                    1
+kgcs.ics                   1
+mailboss.ics               1
+omni.ics                   1
+seraja.ics                 1
+students.ics               1
+testlab.ics                1
+
+
+******************************
+******************************
+
+The following page/s have the most valid outlinks:
+--->  http://fano.ics.uci.edu/cites/Publication/
+--->  https://fano.ics.uci.edu/cites/Publication/
+TOTAL outlinks: 2404
+
+
+******************************
+******************************
+
+The following page/s have the most words:
+--->  http://sli.ics.uci.edu/Classes/2009S?action=download&upname=timestamps.txt
+TOTAL number of words: 315244
+
+
+******************************
+******************************
+
+50 MOST COMMON WORDS IN THE ENTIRE SET OF PAGES (not including stop words)
+WORD               COUNT
+01) hans           155964
+02) ics            130100
+03) computing      106968
+04) support        104455
+05) function       100312
+06) 2018           98923
+07) 004            98094
+08) var            93129
+09) school         91148
+10) uci            82989
+11) events         81652
+12) will           80899
+13) border         80575
+14) 2016           76506
+15) none           75619
+16) edu            69370
+17) bren           67055
+18) project        66482
+19) information    61893
+20) computer       60916
+21) 2017           59310
+22) 003            58279
+23) https          54616
+24) tribe          53391
+25) color          52494
+26) top            50978
+27) eppstein       49387
+28) data           49005
+29) page           48556
+30) science        47702
+31) margin         47401
+32) web            45532
+33) important      45459
+34) supports       45066
+35) helpdesk       44630
+36) 56128          44358
+37) return         44324
+38) text           44241
+39) new            44005
+40) use            43837
+41) married        43713
+42) may            42971
+43) padding        41959
+44) http           41652
+45) size           41482
+46) photonic       40635
+47) irvine         40506
+48) ago            39327
+49) background     39084
+50) added          38365
