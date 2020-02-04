@@ -196,7 +196,7 @@ def printSubdomainCount(file, subdomainMap):
         # print(pair[0][:-8] + '\t\t' + str(pair[1]))
         lenSub = len(pair[0])  # len(pair[0][:-8])
         sub = (longgestSubdomain - lenSub)
-        file.write(pair[0][:-8] + ' ' * sub + str(pair[1]) + "\n")
+        file.write(pair[0][:-8] + "  " + ' ' * sub + str(pair[1]) + "\n")
 
 
 def printMostOutlinks(file, outMap):
