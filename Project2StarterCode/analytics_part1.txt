@@ -1,0 +1,212 @@
+this file contains ANALYTICS SPECIFICATIONS' 1,2,4 and 5
+1: Keep track of the subdomains that it visited, and count
+	how many different URLs it has processed from each
+	of those subdomains.
+2: Find the page with the most valid out links
+	(of all pages given to your crawler).
+4: What is the longest page in terms of number of words?
+	(HTML markup doesn’t count as words).
+5: What are the 50 most common words in the entire set of pages?
+	(Ignore English stop words, which can be found,
+	(https://www.ranks.nl/stopwords).
+
+
+Main Domain: .uci.edu
+SUBDOMAIN                        COUNT
+ics                      258889
+fano.ics                 204134
+grape.ics                179553
+ngs.ics                  99503
+swiki.ics                93209
+wics.ics                 19794
+sli.ics                  19676
+ganglia.ics              11036
+vision.ics               10606
+sdcl.ics                 6433
+flamingo.ics             6413
+cml.ics                  5834
+hack.ics                 3130
+duttgroup.ics            2209
+emj.ics                  1662
+cradl.ics                1550
+evoke.ics                1545
+cloudberry.ics           1384
+intranet.ics             1187
+computableplant.ics      1182
+calendar.ics             1122
+mcs.ics                  832
+futurehealth.ics         749
+mondego.ics              729
+cwicsocal18.ics          625
+dynamo.ics               516
+cert.ics                 501
+mhcid.ics                440
+jgarcia.ics              414
+honors.ics               393
+mailman.ics              393
+luci.ics                 339
+graphics.ics             329
+seal.ics                 281
+frost.ics                239
+asterix.ics              167
+iasl.ics                 163
+hobbes.ics               160
+chenli.ics               148
+checkmate.ics            127
+support.ics              120
+fr.ics                   103
+datalab.ics              102
+tippersweb.ics           84
+webmail.ics              81
+netreg.ics               80
+sconce.ics               78
+scale.ics                73
+studentcouncil.ics       72
+alderis.ics              70
+sourcerer.ics            46
+isg.ics                  45
+elnino.ics               40
+sana.ics                 40
+radicle.ics              34
+i-sensorium.ics          33
+xtune.ics                33
+ipubmed.ics              32
+archive.ics              26
+malek.ics                23
+alumni.ics               22
+graphmod.ics             21
+psearch.ics              17
+informatics.ics          15
+hombao.ics               13
+sherlock.ics             13
+mswe.ics                 10
+yarra.ics                10
+elms.ics                 9
+jujube.ics               9
+ugradforms.ics           9
+mse.ics                  8
+se.ics                   8
+aiclub.ics               7
+codeexchange.ics         7
+givargis.ics             7
+helpdesk.ics             7
+sprout.ics               7
+student-council.ics      7
+.ics                     6
+mapgrid.ics              6
+matt-smith-v2.ics        6
+tps.ics                  6
+labbie.ics               5
+timesheet.ics            5
+asterixdb.ics            4
+keys.ics                 4
+netra.ics                4
+vip.ics                  4
+checkin.ics              3
+chime.ics                3
+duke.ics                 3
+kdd.ics                  3
+nagios.ics               3
+ucf.ics                  3
+auge.ics                 2
+awareness.ics            2
+cbcl.ics                 2
+cocoa-krispies.ics       2
+db.ics                   2
+dblp.ics                 2
+halps.ics                2
+hanalab.ics              2
+jobs.ics                 2
+metaviz.ics              2
+nile.ics                 2
+pasteur.ics              2
+perennialpolycultures.ics2
+tastier.ics              2
+ambassadors.ics          1
+cherry.ics               1
+drzaius.ics              1
+emj-pc.ics               1
+ftp.ics                  1
+hana.ics                 1
+ipf.ics                  1
+kgcs.ics                 1
+mailboss.ics             1
+omni.ics                 1
+rambo.ics                1
+satware.ics              1
+seraja.ics               1
+testlab.ics              1
+
+
+******************************
+******************************
+
+The following page/s have the most valid outlinks:
+--->  http://fano.ics.uci.edu/cites/Publication/
+--->  https://fano.ics.uci.edu/cites/Publication/
+TOTAL outlinks: 2404
+
+
+******************************
+******************************
+
+The following page/s have the most words:
+--->  http://mondego.ics.uci.edu/datasets/maven-contents.txt
+TOTAL number of words: 9788690
+
+
+******************************
+******************************
+
+50 MOST COMMON WORDS IN THE ENTIRE SET OF PAGES (not including stop words)
+WORD               COUNT
+01) sourcerer      1503865
+02) maven          812379
+03) 2012           757499
+04) jar            722573
+05) org            594697
+06) rwxrwxrwx      533812
+07) drwxrwxrwx     218082
+08) properties     188383
+09) source         181548
+10) hans           155974
+11) apache         148105
+12) com            141302
+13) ics            132170
+14) glassfish      113987
+15) support        109511
+16) computing      107643
+17) function       99388
+18) 004            98135
+19) 2018           97808
+20) school         92842
+21) var            90336
+22) uci            83488
+23) events         82720
+24) will           82522
+25) border         80460
+26) 2016           75666
+27) none           75046
+28) edu            69595
+29) project        69207
+30) web            69109
+31) bren           68270
+32) information    62090
+33) ow2            61981
+34) plugin         61151
+35) computer       60795
+36) 003            58290
+37) 2017           58164
+38) codehaus       56488
+39) data           55869
+40) tribe          53425
+41) core           53174
+42) server         53134
+43) https          53029
+44) color          52529
+45) top            51554
+46) http           49805
+47) page           49663
+48) eppstein       49462
+49) return         49189
+50) api            48574
