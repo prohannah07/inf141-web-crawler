@@ -3,6 +3,7 @@ import re
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+from urlmatch import urlmatch
 import lxml
 import tldextract
 import analytics
@@ -80,7 +81,7 @@ class Crawler:
             soup = BeautifulSoup(url_data["content"], 'lxml-xml')
             for link in soup.find_all('a', href=True):
                 extracted_link = link.get('href')
-                if "http" not in extracted_link:
+                if "ttp" not in extracted_link:
                     # print(link.get('href'))
                     if url_data["is_redirected"] == True:
                         web_url = url_data["final_url"]

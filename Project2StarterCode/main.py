@@ -4,8 +4,8 @@ import logging
 
 import sys
 
-# import re
-# from urllib.parse import urlparse
+import re
+from urllib.parse import urlparse
 
 from corpus import Corpus
 from crawler import Crawler
@@ -54,8 +54,15 @@ if __name__ == "__main__":
     # print(parsed)
     # parsed = urlparse("http://flamingo.ics.uci.edu/releases/3.0/src/stringmap/split_l.h")
     # print(parsed)
-    # parsed = urlparse("http://flamingo.ics.uci.edu/releases/3.0/src/topk/example.cc")
-    # print(parsed)
+    parsed = urlparse("http://flamingo.ics.uci.edu/releases/account/3.0/src/topk/example.pdf")
+    print(parsed)
+    print( "True" if re.match(".*\.cc$", parsed.path.lower()) else "False" )
+    parsed = urlparse("http://calendar.ics.uci.edu")
+    print(parsed)
+    print( "True" if re.match("^.*calendar.*$", parsed.path.lower()) else "False" )
+    parsed = urlparse("http://town.com/calendar/cows")
+    print(parsed)
+    print( "True" if re.match("^.*calendar.*$", parsed.path.lower()) else "False" )
     # parsed = urlparse("http://flamingo.ics.uci.edu/releases/4.1/src/filtertree/data/.svn/entries")
     # print(parsed)
 
