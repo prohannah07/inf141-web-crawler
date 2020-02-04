@@ -3,6 +3,7 @@ import re
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
+from urlmatch import urlmatch
 import lxml
 import tldextract
 import analytics
@@ -80,7 +81,7 @@ class Crawler:
             soup = BeautifulSoup(url_data["content"], 'lxml-xml')
             for link in soup.find_all('a', href=True):
                 extracted_link = link.get('href')
-                if "http" not in extracted_link:
+                if "ttp" not in extracted_link:
                     # print(link.get('href'))
                     if url_data["is_redirected"] == True:
                         web_url = url_data["final_url"]
@@ -107,22 +108,41 @@ class Crawler:
         if parsed.scheme not in set(["http", "https"]):
             return False
         try:
-            return ".ics.uci.edu" in parsed.hostname \
-                   and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"
-                                    + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf"
-                                    + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1"
-                                    + "|thmx|mso|arff|rtf|jar|csv"
-                                    + "|sql|htm|java|prefs|class|h|cc|cpp|svn"
-                                    + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) \
-                and parsed.fragment == "" \
-                and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) \
-                and not re.match("^.*calendar.*$", parsed.path.lower()) \
-                and not "replytocom" in parsed.path \
-                and not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower())))
+            # return ".ics.uci.edu" in parsed.hostname \
+            #        and not re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4"
+            #                         + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf"
+            #                         + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1"
+            #                         + "|thmx|mso|arff|rtf|jar|csv"
+            #                         + "|sql|htm|java|prefs|class|h|cc|cpp|svn"
+            #                         + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) \
+            #     and parsed.fragment == "" \
+            #     and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) \
+            #     and not re.match("^.*calendar.*$", parsed.path.lower()) \
+            #     and not "replytocom" in parsed.path \
+            #     and not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower())))
             #                  \
             # and parsed.fragment == "" \
             # and False if( "grape" in parsed.hostname and "attachment" in parsed.path ) else True \
             # and not "replytocom" in parsed.path
+
+            if "ics.uci.edu" not in parsed.hostname or parsed.fragment != "" or \
+            re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" +
+                    "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" +
+                    "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" +
+                    "|thmx|mso|arff|rtf|jar|csv" +
+                    "|sql|htm|java|prefs|class|h|cc|cpp|svn|txt" +
+                    "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) or \
+            re.match ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower()))):
+                return False
+                
+            elif re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) or \
+            ("calendar" not in parsed.hostname and re.match("^.*calendar.*$", parsed.path.lower())) or \
+            re.match "replytocom" in parsed.path:
+                self.trap_links_file.write(url + "\n")
+                return False
+
+            else:
+                return True
 
         except TypeError:
             print("TypeError for ", parsed)

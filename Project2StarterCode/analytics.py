@@ -156,11 +156,11 @@ def printTopFifty(file, tokenMappedFrequencies):
     file.write(
         "50 MOST COMMON WORDS IN THE ENTIRE SET OF PAGES (not including stop words)\n")
     sub1 = longestWord - len("WORD")
-    file.write("WORD" + '    ' + ' ' * sub1 + "COUNT\n")
+    file.write("WORD" + '        ' + ' ' * sub1 + "COUNT\n")
     for pair in sortedTokens:
         sub = longestWord - len(pair[0])
         # print(str(count + 1) + ") " + pair[0] + '\t\t' + str(pair[1]))
-        if count < 10:
+        if count < 9:
             file.write("0" + str(count + 1) + ") " +
                        pair[0] + '    ' + ' ' * sub + str(pair[1]) + "\n")
         else:
@@ -191,12 +191,12 @@ def printSubdomainCount(file, subdomainMap):
 
     file.write("Main Domain: .uci.edu\n")
     sub1 = longgestSubdomain - len("SUBDOMAIN")
-    file.write("SUBDOMAIN" + '    ' + ' ' * sub1 + "COUNT\n")
+    file.write("SUBDOMAIN" + ' ' * sub1 + "COUNT\n")
     for pair in sortedTokens:
         # print(pair[0][:-8] + '\t\t' + str(pair[1]))
-        lenSub = len(pair[0][:-8])
+        lenSub = len(pair[0])  # len(pair[0][:-8])
         sub = (longgestSubdomain - lenSub)
-        file.write(pair[0][:-8] + ' ' * sub + str(pair[1]) + "\n")
+        file.write(pair[0][:-8] + "  " + ' ' * sub + str(pair[1]) + "\n")
 
 
 def printMostOutlinks(file, outMap):
