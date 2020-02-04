@@ -97,6 +97,7 @@ class Crawler:
                     and parsed.fragment == "" \
                     and not re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) \
                     and not re.match("^.*calendar.*$", parsed.path.lower()) \
+                    and not "replytocom" in parsed.path \
                     and not ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path.lower()) or re.match("^.*timeline.*$", parsed.path.lower())))
                     #                  \
                     # and parsed.fragment == "" \
