@@ -96,6 +96,9 @@ class Crawler:
         Function returns True or False based on whether the url has to be fetched or not. This is a great place to
         filter out crawler traps. Duplicated urls will be taken care of by frontier. You don't need to check for duplication
         in this method
+
+        where we got trap detection help: https://support.archive-it.org/hc/en-us/articles/208332943-Identify-and-avoid-crawler-traps-
+
         """
         # ext = tldextract.extract(url)
         # print("subdomain: " + ext.subdomain, "domain: " +
