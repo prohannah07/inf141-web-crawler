@@ -3,8 +3,6 @@ import re
 from urllib.parse import urlparse
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
-import lxml
-import tldextract
 import analytics
 
 logger = logging.getLogger(__name__)
@@ -16,12 +14,11 @@ class Crawler:
     the frontier
     """
 
-    def __init__(self, frontier, corpus, dl_links_file, trap_links_file, ignored_links_file):
+    def __init__(self, frontier, corpus, dl_links_file, trap_links_file):
         self.frontier = frontier
         self.corpus = corpus
         self.dl_links_file = dl_links_file
         self.trap_links_file = trap_links_file
-        self.ignored_links_file = ignored_links_file
 
         self.dl_links_file.write(
             "This file contains ANALYTICS SPECIFICATIONS #3\n")
@@ -31,12 +28,7 @@ class Crawler:
         self.trap_links_file.write(
             "This file contains ANALYTICS SPECIFICATIONS #3\n")
         self.trap_links_file.write(
-            "Specifically, this file contains all the identified trap urls\n\n")
-
-        self.ignored_links_file.write(
-            "This file is an extension of ANALYTICS SPECIFICATIONS #3\n")
-        self.ignored_links_file.write(
-            "Specifically, this file contains all the urls outside of the ics subdomain that isn't considered a trap\n\n")
+            "Specifically, this file contains all possible trap urls and the ignored urls outside of the ics subdomain\n\n")
 
     def start_crawling(self):
         """
@@ -116,7 +108,7 @@ class Crawler:
         try:
             url_path = parsed.path.lower()
             if ".ics.uci.edu" not in parsed.hostname or parsed.fragment != "" or re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" + "|thmx|mso|arff|rtf|jar|csv" + "|sql|htm|java|prefs|class|h|cc|cpp|svn|txt" + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", url_path) or ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path) or re.match("^.*timeline.*$", url_path) or re.match("^.*action=diff.*$", parsed.query))) or re.match("^.*img.*$", url_path):
-                self.ignored_links_file.write(url + "\n")
+                self.trap_links_file.write(url + "\n")
                 return False
 
             elif re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", url_path) or ("calendar" not in parsed.hostname and re.match("^.*calendar.*$", url_path)):

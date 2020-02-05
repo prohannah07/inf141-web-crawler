@@ -33,14 +33,12 @@ if __name__ == "__main__":
     analytics_path1 = 'analytics_part1.txt'
     analytics_path2 = 'analytics_part2.txt'
     analytics_path3 = 'analytics_part3.txt'
-    analytics_path4 = 'analytics_part4.txt'
 
     ap1 = open(analytics_path1, 'w')
     ap2 = open(analytics_path2, 'w')
     ap3 = open(analytics_path3, 'w')
-    ap4 = open(analytics_path4, 'w')
 
-    crawler = Crawler(frontier, corpus, ap2, ap3, ap4)
+    crawler = Crawler(frontier, corpus, ap2, ap3)
     crawler.start_crawling()
 
     analytics.display_analytics(ap1)
@@ -48,4 +46,3 @@ if __name__ == "__main__":
     ap1.close()
     ap2.close()
     ap3.close()
-    ap4.close()
