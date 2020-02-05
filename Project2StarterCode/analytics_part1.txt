@@ -12,7 +12,7 @@ this file contains ANALYTICS SPECIFICATIONS' 1,2,4 and 5
 
 
 Main Domain: .uci.edu
-SUBDOMAIN                   COUNT
+SUBDOMAIN                  COUNT
 ics                        231435
 fano.ics                   204134
 ngs.ics                    98022
