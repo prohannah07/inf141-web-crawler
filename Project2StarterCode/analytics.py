@@ -190,7 +190,7 @@ def printSubdomainCount(file, subdomainMap):
                           key=lambda p: (-p[1], p[0]))
 
     file.write("Main Domain: .uci.edu\n")
-    sub1 = longgestSubdomain - len("SUBDOMAIN")
+    sub1 = (longgestSubdomain - len("SUBDOMAIN")) - 6
     file.write("SUBDOMAIN" + ' ' * sub1 + "COUNT\n")
     for pair in sortedTokens:
         # print(pair[0][:-8] + '\t\t' + str(pair[1]))

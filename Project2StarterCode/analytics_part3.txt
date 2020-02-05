@@ -1,5 +1,5 @@
 This file contains ANALYTICS SPECIFICATIONS #3
-Specifically, this file contais all the identified trap urls
+Specifically, this file contains all the identified trap urls
 
 https://www.ics.uci.edu/~mguindan/calendar.html
 http://graphics.ics.uci.edu/calendar.html

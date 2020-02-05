@@ -12,7 +12,7 @@ this file contains ANALYTICS SPECIFICATIONS' 1,2,4 and 5
 
 
 Main Domain: .uci.edu
-SUBDOMAIN                        COUNT
+SUBDOMAIN                   COUNT
 ics                        231435
 fano.ics                   204134
 ngs.ics                    98022
@@ -141,8 +141,8 @@ testlab.ics                1
 ******************************
 
 The following page/s have the most valid outlinks:
---->  http://fano.ics.uci.edu/cites/Publication/
 --->  https://fano.ics.uci.edu/cites/Publication/
+--->  http://fano.ics.uci.edu/cites/Publication/
 TOTAL outlinks: 2404
 
 

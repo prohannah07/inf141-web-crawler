@@ -31,12 +31,12 @@ class Crawler:
         self.trap_links_file.write(
             "This file contains ANALYTICS SPECIFICATIONS #3\n")
         self.trap_links_file.write(
-            "Specifically, this file contais all the identified trap urls\n\n")
+            "Specifically, this file contains all the identified trap urls\n\n")
 
         self.ignored_links_file.write(
             "This file is an extension of ANALYTICS SPECIFICATIONS #3\n")
         self.ignored_links_file.write(
-            "Specifically, this file contais all the urls outside of the ics subdomain that isn't considered a trap\n\n")
+            "Specifically, this file contains all the urls outside of the ics subdomain that isn't considered a trap\n\n")
 
     def start_crawling(self):
         """
