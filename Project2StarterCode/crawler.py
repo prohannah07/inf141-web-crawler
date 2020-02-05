@@ -114,11 +114,12 @@ class Crawler:
         if parsed.scheme not in set(["http", "https"]):
             return False
         try:
-            if "ics.uci.edu" not in parsed.hostname or parsed.fragment != "" or re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" + "|thmx|mso|arff|rtf|jar|csv" + "|sql|htm|java|prefs|class|h|cc|cpp|svn|txt" + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", parsed.path.lower()) or ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path) or re.match("^.*timeline.*$", parsed.path))):
+            url_path = parsed.path.lower()
+            if ".ics.uci.edu" not in parsed.hostname or parsed.fragment != "" or re.match(".*\.(css|js|bmp|gif|jpe?g|ico" + "|png|tiff?|mid|mp2|mp3|mp4" + "|wav|avi|mov|mpeg|ram|m4v|mkv|ogg|ogv|pdf" + "|ps|eps|tex|ppt|pptx|doc|docx|xls|xlsx|names|data|dat|exe|bz2|tar|msi|bin|7z|psd|dmg|iso|epub|dll|cnf|tgz|sha1" + "|thmx|mso|arff|rtf|jar|csv" + "|sql|htm|java|prefs|class|h|cc|cpp|svn|txt" + "|rm|smil|wmv|swf|wma|zip|rar|gz|pdf)$", url_path) or ("grape" in parsed.hostname and (re.match("^.*attachment.*$", parsed.path) or re.match("^.*timeline.*$", url_path) or re.match("^.*action=diff.*$", parsed.query))) or re.match("^.*img.*$", url_path):
                 self.ignored_links_file.write(url + "\n")
                 return False
 
-            elif re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", parsed.path.lower()) or ("calendar" not in parsed.hostname and re.match("^.*calendar.*$", parsed.path.lower())) or re.match("replytocom", parsed.path.lower()):
+            elif re.match("^.*?(/.+?/).*?\1.*$|^.*?/(.+?/)\2.*$", url_path) or ("calendar" not in parsed.hostname and re.match("^.*calendar.*$", url_path)):
                 self.trap_links_file.write(url + "\n")
                 return False
 
